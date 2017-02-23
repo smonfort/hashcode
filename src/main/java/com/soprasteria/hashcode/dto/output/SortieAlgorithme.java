@@ -1,10 +1,11 @@
 package com.soprasteria.hashcode.dto.output;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SortieAlgorithme {
 
-	private List<Cache> caches;
+	private List<CacheSortie> caches;
 
 	private long nombreCacheUtilises;
 
@@ -16,11 +17,14 @@ public class SortieAlgorithme {
 		this.nombreCacheUtilises = nombreCacheUtilises;
 	}
 
-	public List<Cache> getCaches() {
+	public List<CacheSortie> getCaches() {
+		if (caches == null) {
+			caches = new ArrayList<CacheSortie>();
+		}
 		return caches;
 	}
 
-	public void setCaches(List<Cache> caches) {
+	public void setCaches(List<CacheSortie> caches) {
 		this.caches = caches;
 	}
 
