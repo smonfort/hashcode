@@ -23,6 +23,15 @@ public class Video {
 		this.size = size;
 	}
 	
+	public boolean equals(Object other)
+    {
+        return other instanceof Video && ((Video) other).getId() == getId();
+    }
+
+    public int hashCode()
+    {
+        return getId();
+    }
 	
 	/**
 	 * @return the id

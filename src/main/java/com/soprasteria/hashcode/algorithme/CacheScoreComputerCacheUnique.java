@@ -226,9 +226,9 @@ public class CacheScoreComputerCacheUnique extends AbstractAlgorithme
     public static void main(String[] args)
     {
 //      new CacheScoreComputerCacheUnique().run("D:/hashcode/kittens.in");
-      new CacheScoreComputer().run("D:/hashcode/me_at_the_zoo.in");
-    new CacheScoreComputer().run("D:/hashcode/trending_today.in");
-    new CacheScoreComputer().run("D:/hashcode/videos_worth_spreading.in");
+      new CacheScoreComputerCacheUnique().run("D:/hashcode/me_at_the_zoo.in");
+    new CacheScoreComputerCacheUnique().run("D:/hashcode/trending_today.in");
+    new CacheScoreComputerCacheUnique().run("D:/hashcode/videos_worth_spreading.in");
 //      new CacheScoreComputer().run("D:/hashcode/exemple.in");
     }
 }

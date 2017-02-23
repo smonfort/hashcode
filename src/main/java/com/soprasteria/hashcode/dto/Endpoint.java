@@ -13,91 +13,111 @@ import java.util.Map;
 
 /**
  * @author jdecure
- * 
  */
-public class Endpoint {
+public class Endpoint
+{
 
-	private Map<Integer, Integer> cachesLatencies;
-	private Map<Integer, Cache> caches;
+    private Map<Integer, Integer> cachesLatencies;
 
-	private int datacenterLatency;
-	private int id;
+    private Map<Integer, Cache> caches;
 
-	/**
+    private int datacenterLatency;
+
+    private int id;
+
+    /**
 	 * 
 	 */
-	public Endpoint() {
-		cachesLatencies = new HashMap<>();
-		caches = new HashMap<>();
-	}
+    public Endpoint()
+    {
+        cachesLatencies = new HashMap<>();
+        caches = new HashMap<>();
+    }
 
-	public void addCache(int idCache, int cacheLatency, int cacheSize) {
-		caches.put(idCache, new Cache(idCache, cacheLatency, cacheSize));
-		cachesLatencies.put(idCache, cacheLatency);
-	}
-	
-	public void addCache(Cache cache) {
-		caches.put(cache.getId(), cache);
-		cachesLatencies.put(cache.getId(), cache.getLatency());
-	}
+    public boolean equals(Object other)
+    {
+        return other instanceof Endpoint && ((Endpoint) other).getId() == getId();
+    }
 
-	/**
-	 * @param caches
-	 *            the caches to set
-	 */
-	public void setCaches(Map<Integer, Cache> caches) {
-		this.caches = caches;
-	}
+    public int hashCode()
+    {
+        return getId();
+    }
 
-	/**
-	 * @return the caches
-	 */
-	public Map<Integer, Cache> getCaches() {
-		return caches;
-	}
+    public void addCache(int idCache, int cacheLatency, int cacheSize)
+    {
+        caches.put(idCache, new Cache(idCache, cacheLatency, cacheSize));
+        cachesLatencies.put(idCache, cacheLatency);
+    }
 
-	/**
-	 * @param cachesLatencies
-	 *            the cachesLatencies to set
-	 */
-	public void setCachesLatencies(Map<Integer, Integer> cachesLatencies) {
-		this.cachesLatencies = cachesLatencies;
-	}
+    public void addCache(Cache cache)
+    {
+        caches.put(cache.getId(), cache);
+        cachesLatencies.put(cache.getId(), cache.getLatency());
+    }
 
-	/**
-	 * @return the cachesLatencies
-	 */
-	public Map<Integer, Integer> getCachesLatencies() {
-		return cachesLatencies;
-	}
+    /**
+     * @param caches the caches to set
+     */
+    public void setCaches(Map<Integer, Cache> caches)
+    {
+        this.caches = caches;
+    }
 
-	/**
-	 * @param datacenterLatency
-	 *            the datacenterLatency to set
-	 */
-	public void setDatacenterLatency(int datacenterLatency) {
-		this.datacenterLatency = datacenterLatency;
-	}
+    /**
+     * @return the caches
+     */
+    public Map<Integer, Cache> getCaches()
+    {
+        return caches;
+    }
 
-	/**
-	 * @return the datacenterLatency
-	 */
-	public int getDatacenterLatency() {
-		return datacenterLatency;
-	}
-	
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
+    /**
+     * @param cachesLatencies the cachesLatencies to set
+     */
+    public void setCachesLatencies(Map<Integer, Integer> cachesLatencies)
+    {
+        this.cachesLatencies = cachesLatencies;
+    }
+
+    /**
+     * @return the cachesLatencies
+     */
+    public Map<Integer, Integer> getCachesLatencies()
+    {
+        return cachesLatencies;
+    }
+
+    /**
+     * @param datacenterLatency the datacenterLatency to set
+     */
+    public void setDatacenterLatency(int datacenterLatency)
+    {
+        this.datacenterLatency = datacenterLatency;
+    }
+
+    /**
+     * @return the datacenterLatency
+     */
+    public int getDatacenterLatency()
+    {
+        return datacenterLatency;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId()
+    {
+        return id;
+    }
 
 }
