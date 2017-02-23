@@ -110,8 +110,12 @@ public class InputFileReader {
 					if (currentEndpointCacheCount > 0) {
 						inEndpoint = true;
 					}
+					else if (currentEndpointIndex == (maxEndpoint - 1)) {
+                        //System.out.println("Fin de la lecture des " + maxEndpoint + " Endpoints!");
+                        inRequest = true;
+                    }
 					
-				}
+				} else
 				
 				// Lecture des caches reliés au endpoints
 				if (inEndpoint) {
@@ -123,7 +127,7 @@ public class InputFileReader {
 					cachesAsList.add(currentCache);
 					
 					//System.out.println("Current cache index : " + currentCacheIndex + ",currentEndpointCacheCount : " + currentEndpointCacheCount + ", current cache latency : " + currentCache.getLatency());
-					if (currentCacheIndex == currentEndpointCacheCount) {
+					if (currentCacheIndex == currentEndpointCacheCount - 1) {
 						inEndpoint = false;
 						currentCacheIndex = -1;
 						//System.out.println("Fin de la lecture du Endpoint : " + currentEndpointIndex);
@@ -139,7 +143,7 @@ public class InputFileReader {
 					//System.out.println(line);
 					lineData = line.split(" ");
 					
-					currentRequest = new Request(Integer.valueOf(lineData[2]), videos.get(lineData[0]), endpoints.get(lineData[1]));
+					currentRequest = new Request(Integer.valueOf(lineData[2]), videos.get(Integer.valueOf(lineData[0])), endpoints.get(Integer.valueOf(lineData[1])));
 					requests.add(currentRequest);
 				}
 
