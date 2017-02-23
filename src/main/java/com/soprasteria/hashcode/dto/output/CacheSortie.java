@@ -8,15 +8,16 @@
  ***********************************************************************************************/
 package com.soprasteria.hashcode.dto.output;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author jdecure
  *
  */
-public class Cache {
+public class CacheSortie {
 
-	private List<String> idVideo;
+	private List<Integer> idsVideo;
 
 	private int idCache;
 
@@ -28,12 +29,15 @@ public class Cache {
 		this.idCache = idCache;
 	}
 
-	public List<String> getIdVideo() {
-		return idVideo;
+	public List<Integer> getIdsVideo() {
+		if (idsVideo == null) {
+			idsVideo = new ArrayList<Integer>();
+		}
+		return idsVideo;
 	}
 
-	public void setIdVideo(List<String> idVideo) {
-		this.idVideo = idVideo;
+	public void setIdsVideo(List<Integer> idsVideo) {
+		this.idsVideo = idsVideo;
 	}
 
 }
