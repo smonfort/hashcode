@@ -49,18 +49,25 @@ public class CacheScoreComputerCacheUnique extends AbstractAlgorithme
 
         Map<Video, List<Cache>> videosDejaEnCache = new HashMap<Video, List<Cache>>(DEFAULT_SIZE_VIDEO);
 
+        
+        int nbCacheUtilise = 0;
         for (Entry<Cache, List<VideoInCache>> entryVideo : mapCacheRequests.entrySet())
         {
             Cache cache = entryVideo.getKey();
 
             List<Integer> listVid = calculterListePourCache(cache, entryVideo.getValue(), videosDejaEnCache);
 
-            CacheSortie sortie = new CacheSortie();
-            sortie.setIdCache(cache.getId());
-            sortie.setIdsVideo(listVid);
-            listCacheSortie.add(sortie);
+            if( listVid.size() > 0 )
+            {
+                CacheSortie sortie = new CacheSortie();
+                sortie.setIdCache(cache.getId());
+                sortie.setIdsVideo(listVid);
+                listCacheSortie.add(sortie);
+                nbCacheUtilise++;
+            }
         }
 
+        resultat.setNombreCacheUtilises(nbCacheUtilise);
         return resultat;
 
     }
@@ -218,10 +225,10 @@ public class CacheScoreComputerCacheUnique extends AbstractAlgorithme
 
     public static void main(String[] args)
     {
-      new CacheScoreComputerCacheUnique().run("D:/hashcode/kittens.in");
-//      new CacheScoreComputer().run("D:/hashcode/me_at_the_zoo.in");
-//    new CacheScoreComputer().run("D:/hashcode/trending_today.in");
-//    new CacheScoreComputer().run("D:/hashcode/videos_worth_spreading.in");
+//      new CacheScoreComputerCacheUnique().run("D:/hashcode/kittens.in");
+      new CacheScoreComputer().run("D:/hashcode/me_at_the_zoo.in");
+    new CacheScoreComputer().run("D:/hashcode/trending_today.in");
+    new CacheScoreComputer().run("D:/hashcode/videos_worth_spreading.in");
 //      new CacheScoreComputer().run("D:/hashcode/exemple.in");
     }
 }
