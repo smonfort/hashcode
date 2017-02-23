@@ -31,7 +31,7 @@ public class FileWriter {
 		}
 
 		try {
-			FileUtils.writeStringToFile(new File("target/" + nomFichier),
+			FileUtils.writeStringToFile(new File(nomFichier),
 					bf.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
