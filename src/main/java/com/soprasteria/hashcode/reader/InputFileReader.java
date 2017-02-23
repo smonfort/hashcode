@@ -34,9 +34,12 @@ public class InputFileReader {
 	}
 
 	public static FileData readFile(String filePath) {
-		Map<Integer, Video> videos  = null;
+		Map<Integer, Video> videos = null;
 		Map<Integer, Endpoint> endpoints = null;
-		Map<Integer, Cache> caches  = null;
+		
+		List<Video> videosAsList = null;
+		List<Endpoint> endpointsAsList = null;
+		List<Cache> cachesAsList = null;
 		List<Request> requests = null;
 		
 		FileData fileData = new FileData();
@@ -67,9 +70,11 @@ public class InputFileReader {
 					fileData.setCacheCount(Integer.valueOf(lineData[3]));
 					fileData.setCacheSize(Integer.valueOf(lineData[4]));
 					
+					videosAsList = new ArrayList<>(fileData.getVideoCount());
 					videos = new HashMap<>(fileData.getVideoCount());
+					endpointsAsList = new ArrayList<>(fileData.getEndpointCount());
 					endpoints = new HashMap<>(fileData.getEndpointCount());
-					caches = new HashMap<>(fileData.getCacheCount());
+					cachesAsList = new ArrayList<>(fileData.getCacheCount());
 					requests = new ArrayList<>(fileData.getRequestCount());
 				}
 				
@@ -81,7 +86,8 @@ public class InputFileReader {
 					lineData = line.split(" ");
 					for (String videoSize : lineData) {
 						video = new Video(videoIndex, Integer.valueOf(videoSize));
-						videos.put(videoIndex, video);
+						videosAsList.add(video);
+						videos.put(video.getId(), video);
 						videoIndex += 1;
 					}
 				}
@@ -97,7 +103,8 @@ public class InputFileReader {
 					currentEndpoint.setId(currentEndpointIndex);
 					currentEndpoint.setDatacenterLatency(Integer.valueOf(lineData[0]));
 					currentEndpointCacheCount = Integer.valueOf(lineData[1]);
-					endpoints.put(currentEndpointIndex, currentEndpoint);
+					endpointsAsList.add(currentEndpoint);
+					endpoints.put(currentEndpoint.getId(), currentEndpoint);
 					//System.out.println("Latence vers datacenter : " + currentEndpoint.getDatacenterLatency() + ", Nombre de cache pour ce endpoint : " + currentEndpointCacheCount);
 					
 					if (currentEndpointCacheCount > 0) {
@@ -112,7 +119,8 @@ public class InputFileReader {
 					lineData = line.split(" ");
 					currentCache = new Cache(Integer.valueOf(lineData[0]), fileData.getCacheSize(), Integer.valueOf(lineData[1]));
 					currentEndpoint.addCache(currentCache);
-					caches.put(currentCache.getId(), currentCache);
+					//caches.put(currentCache.getId(), currentCache);
+					cachesAsList.add(currentCache);
 					
 					//System.out.println("Current cache index : " + currentCacheIndex + ",currentEndpointCacheCount : " + currentEndpointCacheCount + ", current cache latency : " + currentCache.getLatency());
 					if (currentCacheIndex == currentEndpointCacheCount) {
@@ -137,6 +145,11 @@ public class InputFileReader {
 
 				index += 1;
 			}
+			
+			fileData.setCaches(cachesAsList);
+			fileData.setRequests(requests);
+			fileData.setEndpoints(endpointsAsList);
+			fileData.setVideos(videosAsList);
 			
 		} catch (IOException e) {
 			e.printStackTrace();
