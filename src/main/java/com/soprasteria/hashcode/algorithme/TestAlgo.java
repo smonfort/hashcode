@@ -99,20 +99,21 @@ public class TestAlgo extends AbstractAlgorithme {
 		// Sinon, regarder ce qu'il y a déjà dans le cache et on rajoute la
 		// vidéo si ça passe
 		List<Integer> videos = cacheARemplir.getIdsVideo();
-		int taille = 0;
-		for (Integer idVideo : videos) {
-			// Récupérer la taille des vidéos présentes dans le cache
-			for (Video vid : entree.getVideos()) {
-				if (vid.getId() == idVideo) {
-					taille += vid.getSize();
+		if (!videos.contains(video.getId())) {
+			int taille = 0;
+			for (Integer idVideo : videos) {
+				// Récupérer la taille des vidéos présentes dans le cache
+				for (Video vid : entree.getVideos()) {
+					if (vid.getId() == idVideo) {
+						taille += vid.getSize();
+					}
 				}
 			}
+			// Si ça passe, on ajoute!
+			if (taille + video.getSize() < cache.getSize()) {
+				cacheARemplir.getIdsVideo().add(video.getId());
+			}
 		}
-		// Si ça passe, on ajoute!
-		if (taille + video.getSize() < cache.getSize()) {
-			cacheARemplir.getIdsVideo().add(video.getId());
-		}
-
 	}
 
 	private void traiterEndpoint(FileData entree, Endpoint endpoint,
