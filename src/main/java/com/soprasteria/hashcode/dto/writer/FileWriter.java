@@ -18,9 +18,14 @@ public class FileWriter {
 		for (CacheSortie cache : sortie.getCaches()) {
 			bf.append(cache.getIdCache());
 			bf.append(" ");
+			boolean premiereVideo = true;
 			for (Integer idVideo : cache.getIdsVideo()) {
+				if (!premiereVideo) {
+					bf.append(" ");
+				}
 				bf.append(idVideo);
-				bf.append(" ");
+				premiereVideo = false;
+
 			}
 			bf.append("\n");
 		}
