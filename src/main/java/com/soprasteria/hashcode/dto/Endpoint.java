@@ -21,6 +21,7 @@ public class Endpoint {
 	private Map<Integer, Cache> caches;
 
 	private int datacenterLatency;
+	private int id;
 
 	/**
 	 * 
@@ -83,6 +84,20 @@ public class Endpoint {
 	 */
 	public int getDatacenterLatency() {
 		return datacenterLatency;
+	}
+	
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
 	}
 
 }
