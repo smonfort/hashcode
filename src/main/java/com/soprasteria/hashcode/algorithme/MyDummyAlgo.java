@@ -28,7 +28,7 @@ public class MyDummyAlgo extends AbstractAlgorithme {
 	}
 
 	public static void main(String[] args) {
-		new MyDummyAlgo().run("kitten.in");
+		new MyDummyAlgo().run("src/main/resources/kittens.in");
 	}
 
 }
